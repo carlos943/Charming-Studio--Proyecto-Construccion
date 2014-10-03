@@ -75,7 +75,6 @@ public class ControladorClientes extends GestorBD {
 
     /**
      * Método que se encarga de eliminar a una persona desde la base de datos.
-     * ROMARIO ESTA FUNCIÓN CAMBIA!
      *
      * @param idCliente
      * @return
