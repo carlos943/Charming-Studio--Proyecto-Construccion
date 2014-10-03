@@ -322,22 +322,26 @@ public class VtnAgrega_oModificaProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMusicaEventoActionPerformed
 
     private void btnGuardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedorActionPerformed
-        Servicio arreglo[]=new Servicio[5];
+          ArrayList<Servicio> array=new ArrayList();
+        
+        
         if (this.cbBanqueteraEvento.isSelected()){
-            arreglo[0]=new Servicio("Banquetera",Float.parseFloat(this.txtBanqueteraEvento.getText()));
+            array.add(new Servicio("Banquetera",Float.parseFloat(this.txtBanqueteraEvento.getText())));
         }
         if (this.cbCarpaEvento.isSelected()){
-            arreglo[1]=new Servicio("Carpa",Float.parseFloat(this.txtBanqueteraEvento.getText()));
+            array.add(new Servicio("Carpa",Float.parseFloat(this.txtBanqueteraEvento.getText())));
         }
         if (this.cbLucesEvento.isSelected()){
-            arreglo[2]=new Servicio("Luces",Float.parseFloat(this.txtBanqueteraEvento.getText()));
+            array.add(new Servicio("Luces",Float.parseFloat(this.txtBanqueteraEvento.getText())));
         }
         if (this.cbLugarEvento.isSelected()){
-            arreglo[3]=new Servicio("Lugar",Float.parseFloat(this.txtBanqueteraEvento.getText()));
+            array.add(new Servicio("Lugar",Float.parseFloat(this.txtBanqueteraEvento.getText())));
         }
         if (this.cbMusicaEvento.isSelected()){
-            arreglo[4]=new Servicio("Banquetera",Float.parseFloat(this.txtBanqueteraEvento.getText()));
+            array.add(new Servicio("Banquetera",Float.parseFloat(this.txtBanqueteraEvento.getText())));
         }
+        Servicio arreglo[]=new Servicio[array.size()];
+        array.toArray(arreglo);
         String nombre = this.txtNombreProveedor.getText();
         String direccion = this.txtDireccionProveedor.getText();
         String telefono = this.txtTelefonoProveedor.getText();
@@ -345,8 +349,16 @@ public class VtnAgrega_oModificaProveedor extends javax.swing.JFrame {
         
          Proveedor tempProveedor = new Proveedor(0,nombre, direccion, telefono, correo, arreglo);
         ControladorProveedores ctrlProveedor = new ControladorProveedores();
+        ControladorServicios ctrlServicio=new ControladorServicios();
         
         try {
+            
+            for(Servicio serv : array){
+                ctrlServicio.agregarServicio(serv);
+            }
+            
+            
+             
             if (!seModificaraProveedor) {
                 boolean seAgregoProveedor = ctrlProveedor.agregar(tempProveedor);
                  if (seAgregoProveedor) mensaje("Proveedor Agregado");
